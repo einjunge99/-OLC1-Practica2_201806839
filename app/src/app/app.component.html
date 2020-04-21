@@ -1,0 +1,246 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">C# a Pyton</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <label class="nav-link" href="#"> <input (change)="cambio($event)" style="display: none;" type="file">Abrir
+          archivo <span class="sr-only">(current)</span></label>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="agregarTab()" href="#">Nuevo archivo</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="guardar()" href="#">Guardar</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="guardarComo()" href="#">Guardar como</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<br>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="row">
+        <h2><a class="font-weight-bold pointer" style="color: #007bff;" (click)="analizar()">
+            Analizar
+          </a>
+        </h2>
+      </div>
+      <div class="row">
+        <h5 class="font-weight-bold">Texto de entrada</h5>
+      </div>
+      <div class="row">
+        <div *ngFor="let data of tabs;let i = index">
+          <button (click)="indice(i)" style="margin-right:2px;" type="button" class="btn btn-primary btn-sm">{{i}}</button>
+        </div>
+      </div>
+      <div class="row">
+      
+        <form [formGroup]="primerForm">
+          <textarea value="{{entrada}}" formControlName="entrada" class="form-control" id="exampleFormControlTextarea1"
+            cols="70" rows="12" wrap="off"></textarea>
+        </form>
+      </div>
+      <div style="margin: 1%;">
+
+      </div>
+      <div class="row">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".reporte-lexemas">
+          Reporte de lexemas
+        </button>
+
+      </div>
+      <div style="margin: 1%;">
+
+      </div>
+      <div class="row">
+
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".reporte-errores"
+          [disabled]="!bandera">
+          Reporte de errores
+        </button>
+
+
+      </div>
+      <div style="margin: 1%;">
+
+      </div>
+      <div class="row">
+        <a class="font-weight-bold" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+          aria-controls="collapseExample">
+          Tabla de variables
+        </a>
+
+      </div>
+
+      <div class="row">
+        <div class="collapse  card-body" id="collapseExample">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Variable</th>
+                <th scope="col">Fila</th>
+      
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of diccionario;let i = index">
+                <td>{{i}}</td>
+                <td>{{data.tipo}}</td>
+                <td>{{data.info}}</td>
+                <td>{{data.fila}}</td>
+
+              </tr>
+        
+            </tbody>
+          </table>
+        </div>
+
+
+
+      </div>
+
+    </div>
+    <div class="col-1">
+
+    </div>
+    <div class="col">
+      <br>
+      <br>
+      <div class="row">
+        <h5 class="font-weight-bold">Traducción Pyton</h5>
+      </div>
+      <div class="row">
+        <form [formGroup]="segundoForm">
+          <textarea value="{{traduccion}}" formControlName="traduccion" class="form-control"
+            id="consola" cols="70" rows="8" wrap="off" disabled></textarea>
+        </form>
+      </div>
+      <div class="row">
+        <h5 class="font-weight-bold">Salida Pyton</h5>
+      </div>
+      <div class="row">
+        <div class="col">
+          <a class="font-weight-bold pointer" style="color: #007bff;" (click)="setHtml()">
+            HTML
+          </a>
+        </div>
+        <div class="col">
+          <a class="font-weight-bold pointer" style="color: #dc3545;" (click)="setJson()">
+            JSON
+          </a>
+        </div>
+        <div class="col-8"></div>
+
+      </div>
+      <div class="row">
+        <form [formGroup]="tercerForm">
+          <textarea value="{{python}}" formControlName="salida" class="form-control" id="exampleFormControlTextarea1"
+            cols="70" rows="8" wrap="off" disabled></textarea>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!--------------------------------------------------------------------------
+---------------------CONTENIDO LLAMADO A LO LARGO DEL HTML------------------
+---------------------------------------------------------------------------->
+
+<div class="modal fade reporte-lexemas" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Dato</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Fila</th>
+            <th scope="col">Columna</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of reporteLexemas;let i = index">
+            <td>{{i}}</td>
+            <td>{{data.info}}</td>
+            <td>{{data.tipo}}</td>
+            <td>{{data.fila}}</td>
+            <td>{{data.columna}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+  
+
+<div class="modal fade reporte-errores" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Tipo error</th>
+            <th scope="col">Línea</th>
+            <th scope="col">Columnas</th>
+            <th scope="col">Descripción</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of errorLexema;let i = index">
+            <td>{{i}}</td>
+            <td>Léxico</td>
+            <td>{{data.fila}}</td>
+            <td>{{data.columna}}</td>
+            <td>El caracter '{{data.info}}' no pertenece al lenguaje</td>
+          </tr>
+          <tr *ngFor="let data of errorSintactico;let i = index">
+            <td>{{i}}</td>
+            <td>Sintáctico</td>
+            <td>{{data.fila}}</td>
+            <td>{{data.columna}}</td>
+            <td>{{data.mensaje}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+  
+<script>
+  document.querySelector("textarea").addEventListener('keydown',function(e) {
+    if(e.keyCode === 9) { // tab was pressed
+        // get caret position/selection
+        var start = this.selectionStart;
+        var end = this.selectionEnd;
+
+        var target = e.target;
+        var value = target.value;
+
+        // set textarea value to: text before caret + tab + text after caret
+        target.value = value.substring(0, start)
+                    + "\t"
+                    + value.substring(end);
+
+        // put caret at right position again (add one for the tab)
+        this.selectionStart = this.selectionEnd = start + 1;
+
+        // prevent the focus lose
+        e.preventDefault();
+    }
+},false);
+</script>

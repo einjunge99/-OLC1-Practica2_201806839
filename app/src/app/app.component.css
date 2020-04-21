@@ -1,0 +1,11 @@
+a{
+    text-decoration: none;
+}
+.pointer {
+    cursor: pointer;
+}
+
+#consola {
+    color:white;
+    background: gray;
+}
